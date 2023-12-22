@@ -24,6 +24,13 @@ export function GamesIndex({ games, currentPage, itemsPerPage }) {
           </div>
         ))}
       </div>
+      <div className="col-md-4 d-flex justify-content-end align-items-end">
+        <div className="text-right mb-4">
+          <Link to="/games/new">
+            <a>Don't see your favorite game? Click here!</a>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
