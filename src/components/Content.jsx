@@ -4,6 +4,7 @@ import { GamesIndex } from "./GamesIndex";
 import { GamesNew } from "./GamesNew";
 import { Routes, useNavigate } from "react-router-dom";
 import { Route } from "react-router-dom";
+import { GamesShow } from "./GamesShow";
 
 export function Content() {
   const [games, setGames] = useState([]);
@@ -52,18 +53,30 @@ export function Content() {
     }
 
     return (
-      <div>
-        {currentPage > 0 && <button onClick={() => handlePageChange(currentPage - 1)}>Previous</button>}
+      <div className="d-flex justify-content-center my-4">
+        <button
+          className="btn btn-primary mr-2"
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 0}
+        >
+          Previous
+        </button>
         {Array.from({ length: endPage - startPage + 1 }, (_, index) => (
           <button
             key={startPage + index}
+            className={`btn ${currentPage === startPage + index ? "btn-primary" : "btn-secondary"} mx-1`}
             onClick={() => handlePageChange(startPage + index)}
-            disabled={currentPage === startPage + index}
           >
             {startPage + index + 1}
           </button>
         ))}
-        {currentPage < totalPages - 1 && <button onClick={() => handlePageChange(currentPage + 1)}>Next</button>}
+        <button
+          className="btn btn-primary ml-2"
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages - 1}
+        >
+          Next
+        </button>
       </div>
     );
   };
@@ -73,6 +86,7 @@ export function Content() {
       <Routes>
         <Route path="/" element={<GamesIndex games={games} currentPage={currentPage} itemsPerPage={itemsPerPage} />} />
         <Route path="/games/new" element={<GamesNew onCreateGame={handleCreateGame} />} />
+        <Route path="/games/:id" element={<GamesShow />} />
       </Routes>
       {renderPagination()}
     </div>
