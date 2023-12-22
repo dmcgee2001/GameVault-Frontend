@@ -1,13 +1,14 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 
-/* eslint-disable react/prop-types */
 export function GamesIndex({ games, currentPage, itemsPerPage }) {
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentGames = games.slice(startIndex, endIndex);
 
   return (
-    <div>
+    <div style={{ color: "red" }}>
       <h1 className="mt-4 mb-3">All Games</h1>
       <div className="row row-cols-1 row-cols-md-3 g-4">
         {currentGames.map((game) => (

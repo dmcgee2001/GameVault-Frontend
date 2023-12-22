@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 export function Header() {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg bg-dark">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <a className="navbar-brand" style={{ color: "red" }} href="#">
           Navbar
         </a>
         <button
@@ -19,12 +20,12 @@ export function Header() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">
+              <Link to="/" className="nav-link active" style={{ color: "red" }}>
                 Home
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <a className="nav-link" style={{ color: "red" }} href="#">
                 Link
               </a>
             </li>
@@ -35,17 +36,18 @@ export function Header() {
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
+                style={{ color: "red" }}
               >
                 Dropdown
               </a>
               <ul className="dropdown-menu">
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" style={{ color: "red" }} href="#">
                     Action
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" style={{ color: "red" }} href="#">
                     Another action
                   </a>
                 </li>
@@ -53,21 +55,21 @@ export function Header() {
                   <hr className="dropdown-divider" />
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" style={{ color: "red" }} href="#">
                     Something else here
                   </a>
                 </li>
               </ul>
             </li>
             <li className="nav-item">
-              <a className="nav-link disabled" aria-disabled="true">
+              <a className="nav-link disabled" style={{ color: "red" }} aria-disabled="true">
                 Disabled
               </a>
             </li>
           </ul>
           <form className="d-flex" role="search">
             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-            <button className="btn btn-outline-success" type="submit">
+            <button className="btn btn-outline-danger" type="submit">
               Search
             </button>
           </form>

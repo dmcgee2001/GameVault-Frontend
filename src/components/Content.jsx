@@ -82,12 +82,13 @@ export function Content() {
   };
 
   return (
-    <div className="container">
+    <div className="container d-flex flex-column min-vh-100">
       <Routes>
         <Route path="/" element={<GamesIndex games={games} currentPage={currentPage} itemsPerPage={itemsPerPage} />} />
         <Route path="/games/new" element={<GamesNew onCreateGame={handleCreateGame} />} />
         <Route path="/games/:id" element={<GamesShow />} />
       </Routes>
+      <div className="mt-auto"></div>
       {renderPagination()}
     </div>
   );

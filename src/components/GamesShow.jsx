@@ -16,7 +16,7 @@ export function GamesShow() {
   useEffect(handleShowGame, []);
 
   return (
-    <div className="container mt-4">
+    <div className="container mt-4" style={{ color: "red" }}>
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <div id="games-show">
