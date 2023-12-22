@@ -66,7 +66,7 @@ export function Login() {
                 </label>
                 <input name="password" type="password" className="form-control" required />
               </div>
-              <button type="submit" className="btn btn-danger">
+              <button type="submit" data-bs-dismiss="modal" className="btn btn-danger">
                 Login
               </button>
             </form>

@@ -60,7 +60,7 @@ export function Signup() {
                 </label>
                 <input name="password_confirmation" type="password" className="form-control" required />
               </div>
-              <button type="submit" className="btn btn-danger">
+              <button type="submit" data-bs-dismiss="modal" className="btn btn-danger">
                 Create Account
               </button>
             </form>

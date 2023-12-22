@@ -5,18 +5,31 @@ import { GamesNew } from "./GamesNew";
 import { Routes, useNavigate } from "react-router-dom";
 import { Route } from "react-router-dom";
 import { GamesShow } from "./GamesShow";
+import { CollectionsIndex } from "./CollectionsIndex";
 
 export function Content() {
   const [games, setGames] = useState([]);
+  const [collection, setCollection] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 12;
   const navigate = useNavigate();
+  const jwt = localStorage.getItem("jwt");
+  if (jwt) {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${jwt}`;
+  }
 
   const handleIndexGames = () => {
     console.log("handleIndexGames");
     axios.get("http://localhost:3000/games.json").then((response) => {
       console.log(response.data);
       setGames(response.data);
+    });
+  };
+  const handleIndexCollections = () => {
+    console.log("handleindexcollections");
+    axios.get("http://localhost:3000/collections.json").then((response) => {
+      console.log(response.data);
+      setCollection(response.data);
     });
   };
 
@@ -45,6 +58,7 @@ export function Content() {
   // };
 
   useEffect(handleIndexGames, [currentPage]);
+  useEffect(handleIndexCollections, []);
 
   const totalPages = Math.ceil(games.length / itemsPerPage);
 
@@ -103,6 +117,7 @@ export function Content() {
         <Route path="/" element={<GamesIndex games={games} currentPage={currentPage} itemsPerPage={itemsPerPage} />} />
         <Route path="/games/new" element={<GamesNew onCreateGame={handleCreateGame} />} />
         <Route path="/games/:id" element={<GamesShow />} />
+        <Route path="/collection" element={<CollectionsIndex collection={collection} />} />
       </Routes>
       <div className="mt-auto"></div>
       {location.pathname === "/" && (
