@@ -1,5 +1,14 @@
 import { Link } from "react-router-dom";
+import { Signup } from "./SignupModal";
+import { Login } from "./LoginModal";
+import axios from "axios";
 export function Header() {
+  const handleLogoutClick = (event) => {
+    event.preventDefault();
+    delete axios.defaults.headers.common["Authorization"];
+    localStorage.removeItem("jwt");
+    window.location.href = "/";
+  };
   return (
     <nav className="navbar navbar-expand-lg bg-dark">
       <div className="container-fluid">
@@ -25,8 +34,15 @@ export function Header() {
               </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" style={{ color: "red" }} href="#">
-                Link
+              <a
+                className="nav-link"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#loginModal"
+                style={{ color: "red" }}
+                href="#"
+              >
+                Login
               </a>
             </li>
             <li className="nav-item dropdown">
@@ -62,8 +78,8 @@ export function Header() {
               </ul>
             </li>
             <li className="nav-item">
-              <a className="nav-link disabled" aria-disabled="true">
-                Disabled
+              <a style={{ color: "red" }} type="button" className="nav-link" onClick={handleLogoutClick}>
+                Logout
               </a>
             </li>
           </ul>
@@ -75,6 +91,8 @@ export function Header() {
           </form>
         </div>
       </div>
+      <Signup />
+      <Login />
     </nav>
   );
 }

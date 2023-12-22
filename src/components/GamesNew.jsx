@@ -8,6 +8,7 @@ export function GamesNew(props) {
     event.preventDefault();
     const params = new FormData(event.target);
     props.onCreateGame(params, () => event.target.reset());
+    window.location.href = "/";
   };
 
   return (
