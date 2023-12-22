@@ -16,13 +16,18 @@ export function GamesShow() {
   useEffect(handleShowGame, []);
 
   return (
-    <div className="container mt-4" style={{ color: "red" }}>
+    <div className="container mt-4">
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <div id="games-show">
             <h1 className="text-center mb-4">Game Info</h1>
             <div className="text-center">
-              <img src={game.background_image} alt={game.name} className="img-fluid rounded" />
+              <img
+                src={game.background_image}
+                alt={game.name}
+                className="img-fluid rounded"
+                style={{ objectFit: "cover", height: "400px", width: "100%", aspectRatio: "16/9" }}
+              />
             </div>
             <h2 className="mt-4">{game.name}</h2>
             <p>
@@ -32,7 +37,7 @@ export function GamesShow() {
               <strong>Description:</strong>
             </p>
             <p>{game.description}</p>
-            <button className="btn btn-primary" onClick={() => navigate(-1)}>
+            <button className="btn btn-danger" onClick={() => navigate(-1)}>
               Go back
             </button>
           </div>

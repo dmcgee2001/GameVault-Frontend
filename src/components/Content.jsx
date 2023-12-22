@@ -27,6 +27,22 @@ export function Content() {
       successCallback();
     });
   };
+  // const handleUpdateGame = (id, params, successCallback) => {
+  //   console.log("handleUpdateGame", params);
+  //   axios.patch(`http://localhost:3000/games/${id}.json`, params).then((response) => {
+  //     setGames(
+  //       games.map((game) => {
+  //         if (game.id === response.data.id) {
+  //           return response.data;
+  //         } else {
+  //           return game;
+  //         }
+  //       })
+  //     );
+  //     successCallback();
+  //     handleClose();
+  //   });
+  // };
 
   useEffect(handleIndexGames, [currentPage]);
 
@@ -37,7 +53,7 @@ export function Content() {
     navigate(`/?page=${page}`);
   };
 
-  const renderPagination = () => {
+  const GamesIndexPagination = () => {
     const maxVisibleButtons = 5;
     let startPage = Math.max(0, currentPage - Math.floor(maxVisibleButtons / 2));
     let endPage = Math.min(totalPages - 1, startPage + maxVisibleButtons - 1);
@@ -55,7 +71,7 @@ export function Content() {
     return (
       <div className="d-flex justify-content-center my-4">
         <button
-          className="btn btn-primary mr-2"
+          className="btn btn-danger mr-2"
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 0}
         >
@@ -64,14 +80,14 @@ export function Content() {
         {Array.from({ length: endPage - startPage + 1 }, (_, index) => (
           <button
             key={startPage + index}
-            className={`btn ${currentPage === startPage + index ? "btn-primary" : "btn-secondary"} mx-1`}
+            className={`btn ${currentPage === startPage + index ? "btn-danger" : "btn-secondary"} mx-1`}
             onClick={() => handlePageChange(startPage + index)}
           >
             {startPage + index + 1}
           </button>
         ))}
         <button
-          className="btn btn-primary ml-2"
+          className="btn btn-danger ml-2"
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages - 1}
         >
@@ -89,7 +105,15 @@ export function Content() {
         <Route path="/games/:id" element={<GamesShow />} />
       </Routes>
       <div className="mt-auto"></div>
-      {renderPagination()}
+      {location.pathname === "/" && (
+        <GamesIndexPagination
+          games={games}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          itemsPerPage={itemsPerPage}
+          navigate={navigate}
+        />
+      )}
     </div>
   );
 }

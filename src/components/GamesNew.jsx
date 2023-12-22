@@ -16,9 +16,7 @@ export function GamesNew(props) {
         <div className="col-md-6">
           <div className="card">
             <div className="card-body">
-              <h1 className="card-title text-center mb-4" style={{ color: "red" }}>
-                New Game
-              </h1>
+              <h1 className="card-title text-center mb-4">Add a Game to Our Library</h1>
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label htmlFor="name" className="form-label">
@@ -44,8 +42,8 @@ export function GamesNew(props) {
                   </label>
                   <input name="description" type="text" className="form-control" id="description" />
                 </div>
-                <button type="submit" className="btn btn-primary">
-                  Create Game
+                <button type="submit" className="btn btn-danger">
+                  Add Game
                 </button>
               </form>
               <div className="text-end mt-3">

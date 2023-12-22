@@ -42,12 +42,12 @@ export function Header() {
               </a>
               <ul className="dropdown-menu">
                 <li>
-                  <a className="dropdown-item" style={{ color: "red" }} href="#">
+                  <a className="dropdown-item" href="#">
                     Action
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" style={{ color: "red" }} href="#">
+                  <a className="dropdown-item" href="#">
                     Another action
                   </a>
                 </li>
@@ -55,14 +55,14 @@ export function Header() {
                   <hr className="dropdown-divider" />
                 </li>
                 <li>
-                  <a className="dropdown-item" style={{ color: "red" }} href="#">
+                  <a className="dropdown-item" href="#">
                     Something else here
                   </a>
                 </li>
               </ul>
             </li>
             <li className="nav-item">
-              <a className="nav-link disabled" style={{ color: "red" }} aria-disabled="true">
+              <a className="nav-link disabled" aria-disabled="true">
                 Disabled
               </a>
             </li>
