@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-export function GamesShow() {
+export function GamesShow(props) {
   const [game, setGame] = useState({});
   const params = useParams();
   const navigate = useNavigate();
@@ -12,7 +13,12 @@ export function GamesShow() {
       setGame(response.data);
     });
   };
-
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const params = { game_id: game.id };
+    props.onCreateCollection(params, () => event.target.reset());
+    window.location.href = `/games/${game.id}`;
+  };
   useEffect(handleShowGame, []);
 
   return (
@@ -39,6 +45,9 @@ export function GamesShow() {
             <p>{game.description}</p>
             <button className="btn btn-danger" onClick={() => navigate(-1)}>
               Go back
+            </button>{" "}
+            <button className="btn btn-secondary" onClick={handleSubmit}>
+              Add to Collection
             </button>
           </div>
         </div>

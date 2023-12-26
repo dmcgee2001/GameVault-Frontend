@@ -40,22 +40,13 @@ export function Content() {
       successCallback();
     });
   };
-  // const handleUpdateGame = (id, params, successCallback) => {
-  //   console.log("handleUpdateGame", params);
-  //   axios.patch(`http://localhost:3000/games/${id}.json`, params).then((response) => {
-  //     setGames(
-  //       games.map((game) => {
-  //         if (game.id === response.data.id) {
-  //           return response.data;
-  //         } else {
-  //           return game;
-  //         }
-  //       })
-  //     );
-  //     successCallback();
-  //     handleClose();
-  //   });
-  // };
+  const handleCreateCollection = (params, successCallback) => {
+    console.log("handleCreateCollection", params);
+    axios.post("http://localhost:3000/collections.json", params).then((response) => {
+      setCollection([...collection, response.data]);
+      successCallback();
+    });
+  };
 
   useEffect(handleIndexGames, [currentPage]);
   useEffect(handleIndexCollections, []);
@@ -116,7 +107,7 @@ export function Content() {
       <Routes>
         <Route path="/" element={<GamesIndex games={games} currentPage={currentPage} itemsPerPage={itemsPerPage} />} />
         <Route path="/games/new" element={<GamesNew onCreateGame={handleCreateGame} />} />
-        <Route path="/games/:id" element={<GamesShow />} />
+        <Route path="/games/:id" element={<GamesShow onCreateCollection={handleCreateCollection} />} />
         <Route path="/collection" element={<CollectionsIndex collection={collection} />} />
       </Routes>
       <div className="mt-auto"></div>
