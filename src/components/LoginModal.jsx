@@ -80,7 +80,7 @@ export function Login() {
                 data-bs-toggle="modal"
                 className="text-primary text-decoration-none"
               >
-                Signup
+                Sign Up
               </a>
             </p>
           </div>
