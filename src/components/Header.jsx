@@ -3,6 +3,7 @@ import { Signup } from "./SignupModal";
 import { Login } from "./LoginModal";
 import axios from "axios";
 export function Header() {
+  const jwtToken = localStorage.getItem("jwt");
   const handleLogoutClick = (event) => {
     event.preventDefault();
     delete axios.defaults.headers.common["Authorization"];
@@ -13,7 +14,7 @@ export function Header() {
     <nav className="navbar navbar-expand-lg bg-dark">
       <div className="container-fluid">
         <a className="navbar-brand" style={{ color: "red" }} href="#">
-          Navbar
+          GameVault
         </a>
         <button
           className="navbar-toggler"
@@ -23,6 +24,7 @@ export function Header() {
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          style={{ color: "red" }}
         >
           <span className="navbar-toggler-icon" />
         </button>
@@ -33,18 +35,33 @@ export function Header() {
                 Home
               </Link>
             </li>
-            <li className="nav-item">
-              <a
-                className="nav-link"
-                type="button"
-                data-bs-toggle="modal"
-                data-bs-target="#loginModal"
-                style={{ color: "red" }}
-                href="#"
-              >
-                Login
-              </a>
-            </li>
+            {jwtToken ? (
+              <>
+                <li className="nav-item">
+                  <Link to="/collection" style={{ color: "red" }} type="button" className="nav-link">
+                    My Vault
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <a style={{ color: "red" }} type="button" className="nav-link" onClick={handleLogoutClick}>
+                    Logout
+                  </a>
+                </li>
+              </>
+            ) : (
+              <li className="nav-item">
+                <a
+                  className="nav-link"
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#loginModal"
+                  style={{ color: "red" }}
+                  href="#"
+                >
+                  Login
+                </a>
+              </li>
+            )}
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
@@ -76,11 +93,6 @@ export function Header() {
                   </a>
                 </li>
               </ul>
-            </li>
-            <li className="nav-item">
-              <a style={{ color: "red" }} type="button" className="nav-link" onClick={handleLogoutClick}>
-                Logout
-              </a>
             </li>
           </ul>
           <form className="d-flex" role="search">
