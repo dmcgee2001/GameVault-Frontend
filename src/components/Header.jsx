@@ -4,6 +4,7 @@ import { Signup } from "./SignupModal";
 import { Login } from "./LoginModal";
 import { useState } from "react";
 import axios from "axios";
+// eslint-disable-next-line no-unused-vars
 export function Header({ games, handleSearch }) {
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -21,9 +22,9 @@ export function Header({ games, handleSearch }) {
     window.location.href = "/";
   };
   return (
-    <nav className="navbar navbar-expand-lg bg-dark">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <a className="navbar-brand" style={{ color: "red" }} href="#">
+        <a className="navbar-brand" href="#">
           GameVault
         </a>
         <button
@@ -34,40 +35,32 @@ export function Header({ games, handleSearch }) {
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
-          style={{ color: "red" }}
         >
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link to="/" className="nav-link active" style={{ color: "red" }}>
+              <Link to="/" className="nav-link active">
                 Home
               </Link>
             </li>
             {jwtToken ? (
               <>
                 <li className="nav-item">
-                  <Link to="/collection" style={{ color: "red" }} type="button" className="nav-link">
+                  <Link to="/collection" type="button" className="nav-link">
                     My Vault
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <a style={{ color: "red" }} type="button" className="nav-link" onClick={handleLogoutClick}>
+                  <a type="button" className="nav-link" onClick={handleLogoutClick}>
                     Logout
                   </a>
                 </li>
               </>
             ) : (
               <li className="nav-item">
-                <a
-                  className="nav-link"
-                  type="button"
-                  data-bs-toggle="modal"
-                  data-bs-target="#loginModal"
-                  style={{ color: "red" }}
-                  href="#"
-                >
+                <a className="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#loginModal" href="#">
                   Login
                 </a>
               </li>
@@ -79,7 +72,6 @@ export function Header({ games, handleSearch }) {
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
-                style={{ color: "red" }}
               >
                 Dropdown
               </a>
@@ -114,7 +106,7 @@ export function Header({ games, handleSearch }) {
               placeholder="Search"
               aria-label="Search"
             />
-            <button className="btn btn-outline-danger" type="submit">
+            <button className="btn btn-outline-dark" type="submit">
               Search
             </button>
           </form>

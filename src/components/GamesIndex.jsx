@@ -9,8 +9,22 @@ export function GamesIndex({ games, currentPage, itemsPerPage }) {
   const currentGames = sortedGames.slice(startIndex, endIndex);
 
   return (
-    <div>
-      <h1 className="mt-4 mb-3">All Games</h1>
+    <div className="container mt-5">
+      <div className="intro-section mb-5">
+        <h1 className="mb-4">Welcome to GameVault</h1>
+        <p className="lead">
+          Discover, organize, and explore your favorite games with GameVault. Our platform offers an extensive
+          collection of games from various genres and platforms. Whether you're a passionate gamer or simply looking for
+          your next gaming adventure, GameVault provides a comprehensive library where you can find information about
+          trending games, create your personalized collections, and connect with fellow gaming enthusiasts.
+        </p>
+        <p className="lead">
+          Start building your virtual game collection, share your experiences, and dive into the world of gaming like
+          never before with GameVault!
+        </p>
+      </div>
+
+      <h2 className="mb-4">All Games</h2>
       <div className="row row-cols-1 row-cols-md-3 g-4">
         {currentGames.map((game) => (
           <div key={game.id} className="col">
@@ -31,9 +45,12 @@ export function GamesIndex({ games, currentPage, itemsPerPage }) {
           </div>
         ))}
       </div>
-      <div className="col-md-4 d-flex justify-content-end align-items-end">
-        <div className="text-right mb-4">
-          <Link to="/games/new">Don't see your favorite game? Click here!</Link>
+
+      <div className="row justify-content-end mt-4">
+        <div className="col-md-4 text-right">
+          <Link to="/games/new" className="btn btn-primary">
+            Don't see your favorite game? Click here!
+          </Link>
         </div>
       </div>
     </div>

@@ -94,7 +94,7 @@ export function Content() {
     return (
       <div className="d-flex justify-content-center my-4">
         <button
-          className="btn btn-danger mr-2"
+          className="btn btn-primary mr-2"
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 0}
         >
@@ -103,14 +103,14 @@ export function Content() {
         {Array.from({ length: endPage - startPage + 1 }, (_, index) => (
           <button
             key={startPage + index}
-            className={`btn ${currentPage === startPage + index ? "btn-danger" : "btn-secondary"} mx-1`}
+            className={`btn ${currentPage === startPage + index ? "btn-primary" : "btn-secondary"} mx-1`}
             onClick={() => handlePageChange(startPage + index)}
           >
             {startPage + index + 1}
           </button>
         ))}
         <button
-          className="btn btn-danger ml-2"
+          className="btn btn-primary ml-2"
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages - 1}
         >
