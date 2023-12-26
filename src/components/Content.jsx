@@ -9,7 +9,7 @@ import { CollectionsIndex } from "./CollectionsIndex";
 
 export function Content() {
   const [games, setGames] = useState([]);
-  const [collection, setCollection] = useState([]);
+  const [collections, setCollections] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 12;
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ export function Content() {
     console.log("handleindexcollections");
     axios.get("http://localhost:3000/collections.json").then((response) => {
       console.log(response.data);
-      setCollection(response.data);
+      setCollections(response.data);
     });
   };
 
@@ -43,8 +43,15 @@ export function Content() {
   const handleCreateCollection = (params, successCallback) => {
     console.log("handleCreateCollection", params);
     axios.post("http://localhost:3000/collections.json", params).then((response) => {
-      setCollection([...collection, response.data]);
+      setCollections([...collections, response.data]);
       successCallback();
+    });
+  };
+  const handleDestroyCollection = (collection) => {
+    console.log("handleDestroyCollection", collection);
+    axios.delete(`http://localhost:3000/collections/${collection}.json`).then(() => {
+      setCollections(collections.filter((p) => p.id !== collection.id));
+      window.location.href = "/collection";
     });
   };
 
@@ -108,7 +115,10 @@ export function Content() {
         <Route path="/" element={<GamesIndex games={games} currentPage={currentPage} itemsPerPage={itemsPerPage} />} />
         <Route path="/games/new" element={<GamesNew onCreateGame={handleCreateGame} />} />
         <Route path="/games/:id" element={<GamesShow onCreateCollection={handleCreateCollection} />} />
-        <Route path="/collection" element={<CollectionsIndex collection={collection} />} />
+        <Route
+          path="/collection"
+          element={<CollectionsIndex onDestroyCollection={handleDestroyCollection} collections={collections} />}
+        />
       </Routes>
       <div className="mt-auto"></div>
       {location.pathname === "/" && (

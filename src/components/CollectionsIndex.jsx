@@ -2,27 +2,38 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 
-export function CollectionsIndex({ collection }) {
+export function CollectionsIndex({ collections, onDestroyCollection }) {
+  const handleClick = (collectionId) => {
+    onDestroyCollection(collectionId);
+  };
   return (
     <div>
-      <h1 className="mt-4 mb-3">Your Games</h1>
+      <h1 className="mt-4 mb-3">Your Vault</h1>
       <div className="row row-cols-1 row-cols-md-3 g-4">
-        {collection.map((item) => (
+        {collections.map((item) => (
           <div key={item.id} className="col">
-            <Link to={`/games/${item.game.id}`} className="text-decoration-none">
-              <div className="card h-100">
+            <div className="card h-100">
+              <Link to={`/games/${item.game.id}`} className="text-decoration-none">
                 <img
                   src={item.game.background_image}
                   className="card-img-top"
                   alt={item.game.name}
                   style={{ objectFit: "cover", height: "200px", width: "100%", aspectRatio: "16/9" }}
                 />
-                <div className="card-body">
+              </Link>
+              <div className="card-body">
+                <Link to={`/games/${item.game.id}`} className="text-decoration-none">
                   <h5 className="card-title">{item.game.name}</h5>
-                  <p className="card-text">Released: {item.game.released}</p>
-                </div>
+                </Link>
+                <p className="card-text">Released: {item.game.released}</p>
+                <button
+                  onClick={() => handleClick(item.id)}
+                  className="btn btn-sm btn-danger position-absolute bottom-0 end-0 m-3"
+                >
+                  Remove
+                </button>
               </div>
-            </Link>
+            </div>
           </div>
         ))}
       </div>
