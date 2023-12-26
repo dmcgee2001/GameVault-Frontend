@@ -6,9 +6,11 @@ import { Routes, useNavigate } from "react-router-dom";
 import { Route } from "react-router-dom";
 import { GamesShow } from "./GamesShow";
 import { CollectionsIndex } from "./CollectionsIndex";
+import { Header } from "./Header";
 
 export function Content() {
   const [games, setGames] = useState([]);
+  const [filteredGames, setFilteredGames] = useState([]);
   const [collections, setCollections] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 12;
@@ -23,6 +25,7 @@ export function Content() {
     axios.get("http://localhost:3000/games.json").then((response) => {
       console.log(response.data);
       setGames(response.data);
+      setFilteredGames(response.data);
     });
   };
   const handleIndexCollections = () => {
@@ -57,6 +60,14 @@ export function Content() {
 
   useEffect(handleIndexGames, [currentPage]);
   useEffect(handleIndexCollections, []);
+  const handleSearch = (query) => {
+    if (query === "") {
+      setFilteredGames(games);
+    } else {
+      const filteredResults = games.filter((game) => game.name.toLowerCase().includes(query.toLowerCase()));
+      setFilteredGames(filteredResults);
+    }
+  };
 
   const totalPages = Math.ceil(games.length / itemsPerPage);
 
@@ -110,26 +121,32 @@ export function Content() {
   };
 
   return (
-    <div className="container d-flex flex-column min-vh-100">
-      <Routes>
-        <Route path="/" element={<GamesIndex games={games} currentPage={currentPage} itemsPerPage={itemsPerPage} />} />
-        <Route path="/games/new" element={<GamesNew onCreateGame={handleCreateGame} />} />
-        <Route path="/games/:id" element={<GamesShow onCreateCollection={handleCreateCollection} />} />
-        <Route
-          path="/collection"
-          element={<CollectionsIndex onDestroyCollection={handleDestroyCollection} collections={collections} />}
-        />
-      </Routes>
-      <div className="mt-auto"></div>
-      {location.pathname === "/" && (
-        <GamesIndexPagination
-          games={games}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          itemsPerPage={itemsPerPage}
-          navigate={navigate}
-        />
-      )}
-    </div>
+    <>
+      <Header games={games} handleSearch={handleSearch} />
+      <div className="container d-flex flex-column min-vh-100">
+        <Routes>
+          <Route
+            path="/"
+            element={<GamesIndex games={filteredGames} currentPage={currentPage} itemsPerPage={itemsPerPage} />}
+          />
+          <Route path="/games/new" element={<GamesNew onCreateGame={handleCreateGame} />} />
+          <Route path="/games/:id" element={<GamesShow onCreateCollection={handleCreateCollection} />} />
+          <Route
+            path="/collection"
+            element={<CollectionsIndex onDestroyCollection={handleDestroyCollection} collections={collections} />}
+          />
+        </Routes>
+        <div className="mt-auto"></div>
+        {location.pathname === "/" && (
+          <GamesIndexPagination
+            games={games}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            itemsPerPage={itemsPerPage}
+            navigate={navigate}
+          />
+        )}
+      </div>
+    </>
   );
 }

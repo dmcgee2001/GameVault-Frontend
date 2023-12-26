@@ -1,8 +1,18 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import { Signup } from "./SignupModal";
 import { Login } from "./LoginModal";
+import { useState } from "react";
 import axios from "axios";
-export function Header() {
+export function Header({ games, handleSearch }) {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleInputChange = (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+    handleSearch(query);
+  };
+
   const jwtToken = localStorage.getItem("jwt");
   const handleLogoutClick = (event) => {
     event.preventDefault();
@@ -95,8 +105,15 @@ export function Header() {
               </ul>
             </li>
           </ul>
-          <form className="d-flex" role="search">
-            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+          <form className="d-flex">
+            <input
+              value={searchQuery}
+              onChange={handleInputChange}
+              className="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
             <button className="btn btn-outline-danger" type="submit">
               Search
             </button>
