@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import { Signup } from "./SignupModal";
 import { Login } from "./LoginModal";
 import { useState } from "react";
 import axios from "axios";
-// eslint-disable-next-line no-unused-vars
+
 export function Header({ games, handleSearch }) {
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -21,6 +22,7 @@ export function Header({ games, handleSearch }) {
     localStorage.removeItem("jwt");
     window.location.href = "/";
   };
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
@@ -52,49 +54,52 @@ export function Header({ games, handleSearch }) {
                     My Vault
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <a type="button" className="nav-link" onClick={handleLogoutClick}>
-                    Logout
+                <li className="nav-item"></li>
+                <li className="nav-item dropdown">
+                  <a
+                    className="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    More
                   </a>
+                  <ul className="dropdown-menu">
+                    <li>
+                      <Link to="/added-games" className="dropdown-item">
+                        My Game Contributions
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/games/new" className="dropdown-item">
+                        Add a Game to our Library
+                      </Link>
+                    </li>
+                    <li>
+                      <hr className="dropdown-divider" />
+                    </li>
+                    <li>
+                      <a className="dropdown-item" onClick={handleLogoutClick} href="#">
+                        Logout
+                      </a>
+                    </li>
+                  </ul>
                 </li>
               </>
             ) : (
-              <li className="nav-item">
-                <a className="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#loginModal" href="#">
-                  Login
-                </a>
-              </li>
+              <>
+                <li className="nav-item">
+                  <a className="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">
+                    Login
+                  </a>
+                </li>
+              </>
             )}
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                More
+            <li className="nav-item">
+              <a className="nav-link" type="button">
+                Contact Us
               </a>
-              <ul className="dropdown-menu">
-                <li>
-                  <Link to="/added-games" className="dropdown-item" href="#">
-                    Games I've Added
-                  </Link>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                </li>
-              </ul>
             </li>
           </ul>
           <form className="d-flex">
