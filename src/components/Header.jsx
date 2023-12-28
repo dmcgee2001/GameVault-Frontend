@@ -77,9 +77,9 @@ export function Header({ games, handleSearch }) {
               </a>
               <ul className="dropdown-menu">
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <Link to="/added-games" className="dropdown-item" href="#">
                     Games I've Added
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a className="dropdown-item" href="#">
