@@ -7,9 +7,11 @@ import { Route } from "react-router-dom";
 import { GamesShow } from "./GamesShow";
 import { CollectionsIndex } from "./CollectionsIndex";
 import { Header } from "./Header";
+import { UserAddedGames } from "./UserAddedGames";
 
 export function Content() {
   const [games, setGames] = useState([]);
+  const [userGames, setUserGames] = useState([]);
   const [filteredGames, setFilteredGames] = useState([]);
   const [collections, setCollections] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
@@ -26,6 +28,13 @@ export function Content() {
       console.log(response.data);
       setGames(response.data);
       setFilteredGames(response.data);
+    });
+  };
+  const handleIndexUserGames = () => {
+    console.log("handleIndexUserGames");
+    axios.get("http://localhost:3000/user-games.json").then((response) => {
+      console.log(response.data);
+      setUserGames(response.data);
     });
   };
   const handleIndexCollections = () => {
@@ -50,6 +59,14 @@ export function Content() {
       successCallback();
     });
   };
+  // const handleDestroyGame = (game) => {
+  //   console.log("handleDestroyGame", game);
+  //   axios.delete(`http://localhost:3000/games/${game.id}.json`).then((response) => {
+  //     setGames(games.filter((p) => p.id !== game.id));
+  //     window.location.href = "/";
+  //   });
+  // };
+
   const handleDestroyCollection = (collection) => {
     console.log("handleDestroyCollection", collection);
     axios.delete(`http://localhost:3000/collections/${collection}.json`).then(() => {
@@ -59,6 +76,7 @@ export function Content() {
   };
 
   useEffect(handleIndexGames, [currentPage]);
+  useEffect(handleIndexUserGames, []);
   useEffect(handleIndexCollections, []);
   const handleSearch = (query) => {
     if (query === "") {
@@ -129,6 +147,7 @@ export function Content() {
             path="/"
             element={<GamesIndex games={filteredGames} currentPage={currentPage} itemsPerPage={itemsPerPage} />}
           />
+          <Route path="/added-games" element={<UserAddedGames games={userGames} />} />
           <Route path="/games/new" element={<GamesNew onCreateGame={handleCreateGame} />} />
           <Route path="/games/:id" element={<GamesShow onCreateCollection={handleCreateCollection} />} />
           <Route

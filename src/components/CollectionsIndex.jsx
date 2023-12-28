@@ -28,7 +28,7 @@ export function CollectionsIndex({ collections, onDestroyCollection }) {
                 <p className="card-text">Released: {item.game.released}</p>
                 <button
                   onClick={() => handleClick(item.id)}
-                  className="btn btn-sm btn-primary position-absolute bottom-0 end-0 m-3"
+                  className="btn btn-sm btn-danger position-absolute bottom-0 end-0 m-3"
                 >
                   Remove
                 </button>
