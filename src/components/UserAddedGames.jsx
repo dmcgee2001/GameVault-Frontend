@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export function UserAddedGames(props) {
-  const navigate = useNavigate;
+  const navigate = useNavigate();
   return (
     <>
       <h2 className="mb-4">All Games</h2>
