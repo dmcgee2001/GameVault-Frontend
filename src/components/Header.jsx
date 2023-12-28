@@ -26,9 +26,9 @@ export function Header({ games, handleSearch }) {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <Link to="/" className="navbar-brand" href="#">
           GameVault
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"

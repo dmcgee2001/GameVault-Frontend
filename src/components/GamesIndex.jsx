@@ -48,7 +48,7 @@ export function GamesIndex({ games, currentPage, itemsPerPage }) {
 
       <div className="row justify-content-end mt-4">
         <div className="col-md-4 text-right">
-          <Link to="/games/new" className="btn btn-primary">
+          <Link to="/games/new" className="btn btn-danger">
             Don't see your favorite game? Click here!
           </Link>
         </div>
