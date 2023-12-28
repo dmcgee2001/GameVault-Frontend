@@ -59,13 +59,24 @@ export function Content() {
       successCallback();
     });
   };
-  // const handleDestroyGame = (game) => {
-  //   console.log("handleDestroyGame", game);
-  //   axios.delete(`http://localhost:3000/games/${game.id}.json`).then((response) => {
-  //     setGames(games.filter((p) => p.id !== game.id));
-  //     window.location.href = "/";
-  //   });
-  // };
+  const handleUpdateGame = (id, params) => {
+    axios.patch(`http://localhost:3000/games/${id}.json`, params).then((response) => {
+      setGames(
+        games.map((game) => {
+          if (game.id === response.data.id) {
+            return response.data;
+          } else {
+            return game;
+          }
+        })
+      );
+    });
+  };
+  const handleDestroyGame = (game) => {
+    console.log("handleDestroyGame", game);
+    axios.delete(`http://localhost:3000/games/${game.id}.json`);
+    window.location.href = "/";
+  };
 
   const handleDestroyCollection = (collection) => {
     console.log("handleDestroyCollection", collection);
@@ -112,7 +123,7 @@ export function Content() {
     return (
       <div className="d-flex justify-content-center my-4">
         <button
-          className="btn btn-primary mr-2"
+          className="btn btn-danger mr-2"
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 0}
         >
@@ -121,14 +132,14 @@ export function Content() {
         {Array.from({ length: endPage - startPage + 1 }, (_, index) => (
           <button
             key={startPage + index}
-            className={`btn ${currentPage === startPage + index ? "btn-primary" : "btn-secondary"} mx-1`}
+            className={`btn ${currentPage === startPage + index ? "btn-danger" : "btn-secondary"} mx-1`}
             onClick={() => handlePageChange(startPage + index)}
           >
             {startPage + index + 1}
           </button>
         ))}
         <button
-          className="btn btn-primary ml-2"
+          className="btn btn-danger ml-2"
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages - 1}
         >
@@ -147,7 +158,12 @@ export function Content() {
             path="/"
             element={<GamesIndex games={filteredGames} currentPage={currentPage} itemsPerPage={itemsPerPage} />}
           />
-          <Route path="/added-games" element={<UserAddedGames games={userGames} />} />
+          <Route
+            path="/added-games"
+            element={
+              <UserAddedGames games={userGames} onDestroyGame={handleDestroyGame} onUpdateGame={handleUpdateGame} />
+            }
+          />
           <Route path="/games/new" element={<GamesNew onCreateGame={handleCreateGame} />} />
           <Route path="/games/:id" element={<GamesShow onCreateCollection={handleCreateCollection} />} />
           <Route
