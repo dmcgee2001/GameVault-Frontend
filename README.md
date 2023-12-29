@@ -1,6 +1,7 @@
 # Game Library Frontend
 
 This is the frontend part of the Game Library project. It's built using [React](https://reactjs.org/) to interact with the Game Library API, allowing users to manage their game collections.
+![gamevault](gamevault)
 
 ## Table of Contents
 
