@@ -58,7 +58,7 @@ The structure of the frontend project is organized as follows:
 - **View Games:** Browse a list of available games.
 - **Add Games to Collection:** Add games to your personal collection.
 - **Remove Games from Collection:** Remove games from your collection.
-- **Update Game Details:** Modify game details within your collection.
+- **Update Game Details:** Modify game details of games you have added to the library.
 
 ## Dependencies
 
