@@ -20,8 +20,8 @@ To set up this frontend application locally, follow these steps:
 1. **Clone the repository:**
 
     ```
-    git clone https://github.com/your-username/game-library-frontend.git
-    cd game-library-frontend
+    git clone https://github.com/dmcgee2001/capstone-project-frontend.git
+    cd capstone-project-frontend
     ```
 
 2. **Install dependencies:**
@@ -33,10 +33,10 @@ To set up this frontend application locally, follow these steps:
 3. **Start the development server:**
 
     ```
-    npm start
+    npm run dev
     ```
 
-    This will run the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+    This will run the app in development mode. Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
 
 ## Usage
 
